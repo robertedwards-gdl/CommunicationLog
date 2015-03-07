@@ -28,7 +28,11 @@ namespace DentalServices.CommunicationLog.Modules
                 }
                 catch(Exception e)
                 {
+#if DEBUG
                     return Negotiate.WithStatusCode(HttpStatusCode.BadRequest).WithModel(e);
+#else
+                    return Negotiate.WithStatusCode(HttpStatusCode.BadRequest);
+#endif
                 }
 
             };
@@ -45,7 +49,11 @@ namespace DentalServices.CommunicationLog.Modules
                 }
                 catch(Exception e)
                 {
+#if DEBUG
                     return Negotiate.WithStatusCode(HttpStatusCode.BadRequest).WithModel(e);
+#else
+                    return Negotiate.WithStatusCode(HttpStatusCode.BadRequest);
+#endif
                 }
             };
 
@@ -57,15 +65,17 @@ namespace DentalServices.CommunicationLog.Modules
 
                     _repo.Save(message);
 
-                    var response = (Response)"Note Added";
-
-                    response.StatusCode = HttpStatusCode.Created;
-
-                    return response;
+                    return Negotiate
+                        .WithModel(new { Response = "Note created" })
+                        .WithStatusCode(HttpStatusCode.Created);
                 }
                 catch (Exception e)
                 {
+#if DEBUG
                     return Negotiate.WithStatusCode(HttpStatusCode.BadRequest).WithModel(e);
+#else
+                    return Negotiate.WithStatusCode(HttpStatusCode.BadRequest);
+#endif
                 }
             };
 
@@ -74,15 +84,19 @@ namespace DentalServices.CommunicationLog.Modules
                 try
                 {
                     System.Console.WriteLine("Visit /machine on " + System.Environment.MachineName);
-                    var response = (Response)System.Environment.MachineName;
 
-                    response.StatusCode = HttpStatusCode.OK;
-
-                    return response;
+                    return Negotiate
+                        .WithModel(new { Response = System.Environment.MachineName })
+                        .WithStatusCode(HttpStatusCode.OK);
                 }
                 catch (Exception e)
                 {
+#if DEBUG
                     return Negotiate.WithStatusCode(HttpStatusCode.BadRequest).WithModel(e);
+#else
+                    return Negotiate.WithStatusCode(HttpStatusCode.BadRequest);
+#endif
+
                 }
             };
         }
