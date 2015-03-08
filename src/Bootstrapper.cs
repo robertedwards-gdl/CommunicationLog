@@ -16,8 +16,6 @@
         {
             base.ConfigureApplicationContainer(container);
 
-            //    //container.Register<INote, Note>().AsSingleton();
-            container.Register<IRepository<Note>, MongoRepository<Note>>().AsSingleton();
             container.Register<ICommunicationRepository, CommunicationRepository>().AsSingleton();
         }
     }

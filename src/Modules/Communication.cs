@@ -65,8 +65,9 @@ namespace DentalServices.CommunicationLog.Modules
 
                     _repo.Save(message);
 
+                    var response = new ServiceResponse { Success = true, Message = "Note Created" };
                     return Negotiate
-                        .WithModel(new ServiceResponse { Success = true, Message = "Note Created" })
+                        .WithModel(response)
                         .WithStatusCode(HttpStatusCode.Created);
                 }
                 catch (Exception e)
@@ -84,9 +85,9 @@ namespace DentalServices.CommunicationLog.Modules
                 try
                 {
                     System.Console.WriteLine("Visit /machine on " + System.Environment.MachineName);
-
+                    var response = new ServiceResponse { Success = true, Message = "Service running on " + System.Environment.MachineName };
                     return Negotiate
-                        .WithModel(new ServiceResponse{ Success = true, Message = "Service running on " + System.Environment.MachineName })
+                        .WithModel(response)
                         .WithStatusCode(HttpStatusCode.OK);
                 }
                 catch (Exception e)
