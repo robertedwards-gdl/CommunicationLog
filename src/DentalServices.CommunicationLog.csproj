@@ -88,6 +88,7 @@
     <Compile Include="Interface\INote.cs" />
     <Compile Include="Model\Note.cs" />
     <Compile Include="Model\Notes.cs" />
+    <Compile Include="Model\ServiceResponse.cs" />
     <Compile Include="Modules\Communication.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
