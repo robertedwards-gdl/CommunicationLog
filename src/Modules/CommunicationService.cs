@@ -8,13 +8,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DentalServices.CommunicationLog.Extensions;
+using log4net;
 
 namespace DentalServices.CommunicationLog.Modules
 {
-    public class Communication: NancyModule
+    public class CommunicationService: NancyModule
     {
         ICommunicationRepository _repo;
-        public Communication(ICommunicationRepository repo)
+        static readonly ILog Logger = LogManager.GetLogger(typeof(CommunicationService));
+
+        public CommunicationService(ICommunicationRepository repo)
         {
             _repo = repo;
 
@@ -23,14 +26,16 @@ namespace DentalServices.CommunicationLog.Modules
                 try
                 {
                     Note note = _repo.GetNote(_.noteId);
-
+                    
                     return Negotiate.WithStatusCode(HttpStatusCode.OK).WithModel(note);
                 }
                 catch(Exception e)
                 {
+                    Logger.Error(e);
 #if DEBUG
                     return Negotiate.WithStatusCode(HttpStatusCode.BadRequest).WithModel(e);
 #else
+                    
                     return Negotiate.WithStatusCode(HttpStatusCode.BadRequest);
 #endif
                 }
@@ -49,6 +54,7 @@ namespace DentalServices.CommunicationLog.Modules
                 }
                 catch(Exception e)
                 {
+                    Logger.Error(e);
 #if DEBUG
                     return Negotiate.WithStatusCode(HttpStatusCode.BadRequest).WithModel(e);
 #else
@@ -72,6 +78,7 @@ namespace DentalServices.CommunicationLog.Modules
                 }
                 catch (Exception e)
                 {
+                    Logger.Error(e);
 #if DEBUG
                     return Negotiate.WithStatusCode(HttpStatusCode.BadRequest).WithModel(e);
 #else
@@ -92,6 +99,7 @@ namespace DentalServices.CommunicationLog.Modules
                 }
                 catch (Exception e)
                 {
+                    Logger.Error(e);
 #if DEBUG
                     return Negotiate.WithStatusCode(HttpStatusCode.BadRequest).WithModel(e);
 #else

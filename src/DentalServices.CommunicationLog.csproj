@@ -51,6 +51,9 @@
     </StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\..\..\..\..\..\TFS\3rd Party\log4net\1.2.13\4.0\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="MongoDB.Bson">
       <HintPath>..\lib\MongoDB.Bson.dll</HintPath>
     </Reference>
@@ -89,7 +92,7 @@
     <Compile Include="Model\Note.cs" />
     <Compile Include="Model\Notes.cs" />
     <Compile Include="Model\ServiceResponse.cs" />
-    <Compile Include="Modules\Communication.cs" />
+    <Compile Include="Modules\CommunicationService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
