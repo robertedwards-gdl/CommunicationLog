@@ -1,5 +1,6 @@
 ﻿using DentalServices.CommunicationLog.Interface;
 using DentalServices.CommunicationLog.Model;
+using DentalServices.CommunicationLog.Extensions;
 using MongoDB.Bson;
 using MongoRepository;
 using System;
@@ -13,6 +14,8 @@ namespace DentalServices.CommunicationLog.DataAccess
     {
         public bool Save(Note note)
         {
+            if (!note.IsValid()) { throw new ArgumentException("Note data is invalid"); }
+
             Note current = null;
 
             if (!string.IsNullOrEmpty(note.Id))
@@ -42,6 +45,11 @@ namespace DentalServices.CommunicationLog.DataAccess
 
         public Note GetNote(string id)
         {
+            if (string.IsNullOrEmpty(id))
+            {
+                throw new ArgumentException("Invalid parameter");
+            }
+
             var objectId = new ObjectId(id);
             var note = this.GetById(objectId);
 
@@ -50,6 +58,11 @@ namespace DentalServices.CommunicationLog.DataAccess
 
         public Notes GetNote(string objectType, string objectKey)
         {
+            if(string.IsNullOrEmpty(objectType) || string.IsNullOrEmpty(objectKey))
+            {
+                throw new ArgumentException("Invalid parameter");
+            }
+
             var list = this.Where(n => n.ObjectType == objectType && n.ObjectKey == objectKey).ToList();
 
             var notes = new Notes();
