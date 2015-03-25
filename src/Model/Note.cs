@@ -19,6 +19,8 @@ namespace DentalServices.CommunicationLog.Model
         public string ModifiedBy { get; set; }
         public DateTime ModifiedUTC { get; set; }
 
+        public string ChrisWoolum { get; set; }
+
      
         [BsonRepresentation(BsonType.ObjectId)]
         public virtual string Id { get; set; }
