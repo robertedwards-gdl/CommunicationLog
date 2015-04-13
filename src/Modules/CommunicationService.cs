@@ -8,14 +8,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DentalServices.CommunicationLog.Extensions;
-using log4net;
+
 
 namespace DentalServices.CommunicationLog.Modules
 {
     public class CommunicationService: NancyModule
     {
         ICommunicationRepository _repo;
-        static readonly ILog Logger = LogManager.GetLogger(typeof(CommunicationService));
 
         public CommunicationService(ICommunicationRepository repo)
         {
@@ -31,7 +30,6 @@ namespace DentalServices.CommunicationLog.Modules
                 }
                 catch(Exception e)
                 {
-                    Logger.Error(e);
 #if DEBUG
                     return Negotiate.WithStatusCode(HttpStatusCode.BadRequest).WithModel(e);
 #else
@@ -54,7 +52,6 @@ namespace DentalServices.CommunicationLog.Modules
                 }
                 catch(Exception e)
                 {
-                    Logger.Error(e);
 #if DEBUG
                     return Negotiate.WithStatusCode(HttpStatusCode.BadRequest).WithModel(e);
 #else
@@ -78,7 +75,6 @@ namespace DentalServices.CommunicationLog.Modules
                 }
                 catch (Exception e)
                 {
-                    Logger.Error(e);
 #if DEBUG
                     return Negotiate.WithStatusCode(HttpStatusCode.BadRequest).WithModel(e);
 #else
@@ -99,7 +95,6 @@ namespace DentalServices.CommunicationLog.Modules
                 }
                 catch (Exception e)
                 {
-                    Logger.Error(e);
 #if DEBUG
                     return Negotiate.WithStatusCode(HttpStatusCode.BadRequest).WithModel(e);
 #else

@@ -2,11 +2,9 @@
 {
     using System;
     using Nancy.Hosting.Self;
-    using log4net;
 
     class Program
     {
-        static readonly ILog Logger = LogManager.GetLogger("Communication Service Host");
         static void Main(string[] args)
         {
             var uri = new Uri("http://localhost:3579");
@@ -15,7 +13,6 @@
             {
                 host.Start();
 
-                Logger.Info("Communication Service Started");
 
                 Console.WriteLine("Your application is running on " + uri);
 
